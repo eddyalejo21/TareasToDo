@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isNew ? 'Tarea Nueva' : 'Modificar Tarea' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-item>
+    <ion-label position="stacked">Título</ion-label>
+    <ion-input [(ngModel)]="task.titulo"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Descripcion</ion-label>
+    <ion-textarea [(ngModel)]="task.descripcion"></ion-textarea>
+  </ion-item>
+  <ion-item style="height: 40px;">
+    <ion-label>¿Completada?</ion-label>
+    <ion-checkbox [(ngModel)]="task.estado"></ion-checkbox>
+  </ion-item>
+
+  <div style="margin-top: 40px;">
+    <ion-button expand="full" shape="round" (click)="saveTask()">Guardar</ion-button>
+    <ion-button expand="full" shape="round" color="danger" *ngIf="!isNew" (click)="deleteTask()">Eliminar</ion-button>
+  </div>
+
+  <ion-loading *ngIf="isLoading"></ion-loading>
+
+</ion-content>
