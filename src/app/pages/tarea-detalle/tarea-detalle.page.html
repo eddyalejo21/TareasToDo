@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text=""></ion-back-button>
@@ -29,4 +29,41 @@
 
   <ion-loading *ngIf="isLoading"></ion-loading>
 
+</ion-content> -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isNew ? 'Tarea Nueva' : 'Modificar Tarea' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div class="logo-container">
+    <ion-img src="assets/logo.png" alt="Logo de la app"></ion-img>
+  </div>
+
+  <div class="input-outline">
+    <ion-label position="stacked">Título</ion-label>
+    <ion-input [(ngModel)]="task.titulo"></ion-input>
+  </div>
+
+  <div class="input-outline">
+    <ion-label position="stacked">Descripción</ion-label>
+    <ion-textarea [(ngModel)]="task.descripcion"></ion-textarea>
+  </div>
+
+  <div class="input-outline checkbox-outline" *ngIf="!isNew">
+    <ion-label>¿Completada?</ion-label>
+    <ion-checkbox [(ngModel)]="task.estado"></ion-checkbox>
+  </div>
+
+  <div class="custom-button-group">
+    <ion-button expand="full" shape="round" (click)="saveTask()">Guardar</ion-button>
+    <ion-button expand="full" shape="round" color="danger" *ngIf="!isNew" (click)="deleteTask()">Eliminar</ion-button>
+  </div>
+
+  <ion-loading *ngIf="isLoading"></ion-loading>
 </ion-content>

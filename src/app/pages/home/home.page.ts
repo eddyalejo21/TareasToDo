@@ -20,34 +20,34 @@ export class HomePage implements OnInit {
   constructor() {} 
 
   async  ngOnInit() {
-    await this.loadTasks();
+    await this.cargarTareas();
   }
 
   ionViewWillEnter() {
     // Recargar tareas cada vez que se entra en esta página
-    this.loadTasks();
+    this.cargarTareas();
   }
 
-  async loadTasks() {
+  async cargarTareas() {
     this.isLoading = true;
-    this.tasks = await this.tareaService.getTasks();
+    this.tasks = await this.tareaService.obtenerTarea();
     this.filteredTasks = [...this.tasks];
     this.isLoading = false;
   }
 
-  filterTasks(event: any) {
+  filterTareas(event: any) {
     const query = event.target.value.toLowerCase();
     this.filteredTasks = this.tasks.filter(tasks =>
       tasks.titulo.toLowerCase().includes(query)
     );
   }
 
-  navigateToDetail(tareaId: string) {
+  verDetalle(tareaId: string) {
     console.log('navega');
     this.navCtrl.navigateForward(`/tarea-detalle/${tareaId}`);
   }
 
-  addTask() {
+  agregarTarea() {
     this.navCtrl.navigateForward(`/tarea-detalle`);
   }
 

@@ -32,7 +32,7 @@ export class TareaDetallePage implements OnInit {
       console.log('no es nuevo');
       this.isNew = false;
       this.isLoading = true;
-      const tasks = await this.tareaServicio.getTasks();
+      const tasks = await this.tareaServicio.obtenerTarea();
       this.task = tasks.find(t => t.id === taskId) || this.task;
       this.isLoading = false;
     } else {
@@ -53,12 +53,12 @@ export class TareaDetallePage implements OnInit {
       console.log('guarda');
       
       
-      await this.tareaServicio.saveTask(this.task);
+      await this.tareaServicio.grabarTarea(this.task);
       loading.dismiss();
       this.presentToastInfo();
     } else {
       console.log('modifica');
-      await this.tareaServicio.updateTask(this.task);
+      await this.tareaServicio.actualizarTarea(this.task);
       loading.dismiss();
       this.presentToastUpdate();
     }
@@ -70,7 +70,7 @@ export class TareaDetallePage implements OnInit {
       message: 'Eliminando'
     });
     loading.present();
-    await this.tareaServicio.deleteTask(this.task.id);
+    await this.tareaServicio.eliminarTarea(this.task.id);
     loading.dismiss();
     this.navCtrl.navigateBack('/home');
   }

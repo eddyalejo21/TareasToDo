@@ -1,26 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      To-Do App
-    </ion-title>
+    <ion-title>To-Do App</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
-  <ion-searchbar (ionInput)="filterTasks($event)" placeholder="Buscar"></ion-searchbar>
+  <div class="logo-container">
+    <ion-img src="assets/logo.png" alt="Logo de la app"></ion-img>
+  </div>
 
-  <ion-list>
-    <ion-item *ngFor="let tarea of filteredTasks" (click)="navigateToDetail(tarea.id)">
-      <ion-label>
-        <h2>{{ tarea.titulo }}</h2>
-        <p [ngClass]="{ 'completado': tarea.estado }">{{ tarea.estado ? 'Completado' : 'Pendiente' }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-searchbar class="custom-searchbar" (ionInput)="filterTareas($event)" placeholder="Buscar"></ion-searchbar>
+
+  <ion-card *ngFor="let tarea of filteredTasks" (click)="verDetalle(tarea.id)">
+    <ion-card-header>
+      <ion-card-title class="titulo-tarea">{{ tarea.titulo }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="card-content-flex">
+      <ion-text>{{ tarea.descripcion }}</ion-text>
+      <ion-badge [color]="tarea.estado ? 'primary' : 'warning'" class="estado-badge">
+        {{ tarea.estado ? 'Completado' : 'Pendiente' }}
+      </ion-badge>
+    </ion-card-content>
+  </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="addTask()">
+    <ion-fab-button (click)="agregarTarea()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
